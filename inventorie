@@ -1,0 +1,31 @@
+[gitea]
+gitea_serber    ansible_host=<server>
+
+[gitea:vars]
+# Ansible Config
+ask_pass= True
+ansible_ssh_user=<user naem>
+ansible_ssh_pass=<user password>
+ansible_sudo_pass=<sudo password>
+#ansible_ssh_private_key_file=<ssh private key path>
+
+# Gitea Config
+work_user=gitea
+gitea_ver=1.9.1
+install_dir=/usr/local/bin/
+work_dir=/var/lib/gitea/
+conf_dir=/etc/gitea
+repo_dir=/var/gitea-repositories
+
+# DataBase Config
+db_name=gitea
+db_user=gitea
+db_pass=gitea
+db_host=127.0.0.1
+db_port=5432
+
+# Site Config
+site_name='Gitea Website Name'
+site_url=<site url>
+site_port=3000
+ssh_port=22

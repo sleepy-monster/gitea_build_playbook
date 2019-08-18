@@ -1,0 +1,29 @@
+---
+- name: check file app.ini
+  become: true
+  stat:
+    path: "{{ conf_dir }}/app.ini"
+  register: app_ini
+
+
+- when: not app_ini.stat.exists
+  include_tasks: generate_token.yml
+
+
+- when: app_ini.stat.exists
+  include_tasks: get_token.yml
+
+
+- name: Configur app.ini
+  become: true
+  vars:
+    install_token: "{{ install_token_result.stdout }}"
+    jwt_secret: "{{ jwt_secret_result.stdout }}"
+    lfs_jwt_secret: "{{ lfs_jwt_secret_result.stdout }}"
+    secret_token: "{{ secret_token_result.stdout }}"
+  template:
+    src: app.ini.j2
+    dest: "{{ conf_dir }}/app.ini"
+    owner: "{{ work_user }}"
+    group: "{{ work_user }}"
+    mode: '0644'

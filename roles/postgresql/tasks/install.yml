@@ -1,0 +1,45 @@
+---
+- name: Add apt key
+  become: true
+  apt_key:
+    url: https://www.postgresql.org/media/keys/ACCC4CF8.asc
+    state: present
+
+
+- name: Add PostgreSQL repositories
+  become: true
+  apt_repository:
+    repo: "deb http://apt.postgresql.org/pub/repos/apt/ {{ ansible_lsb.codename }}-pgdg main"
+    state: present
+    filename: pgdg
+
+
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+
+
+- name: PostgreSQL install
+  become: true
+  apt:
+    name:
+      - python3-pip
+      - postgresql-11
+      - libpq-dev
+
+
+- name: install psycopg2
+  become: true
+  pip:
+    name: psycopg2
+    executable: pip3
+
+
+- name: PostgreSQL start and Enabled
+  become: true
+  systemd:
+    name: postgresql
+    state: started
+    enabled: yes

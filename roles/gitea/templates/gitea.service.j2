@@ -1,0 +1,14 @@
+[Unit]
+Description = gitea is a git type version control software created with golang
+
+[Service]
+Type = simple
+Environment="GITEA_WORK_DIR={{ work_dir }}"
+ExecStart={{ install_dir }}/gitea web -c {{ conf_dir }}/app.ini
+ExecReload=/bin/kill -HUP $MAINPID
+
+User={{ work_user }}
+Group={{ work_user }}
+
+[Install]
+WantedBy = multi-user.target

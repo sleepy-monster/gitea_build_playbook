@@ -1,0 +1,4 @@
+---
+- import_tasks: install.yml
+- import_tasks: configration_app_ini.yml
+- import_tasks: register_service.yml

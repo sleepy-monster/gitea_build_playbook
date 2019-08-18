@@ -1,0 +1,6 @@
+---
+- name: Create postgres database
+  become: true
+  become_user: postgres
+  postgresql_db:
+    name:  "{{ db_name }}"

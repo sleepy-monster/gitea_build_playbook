@@ -1,0 +1,16 @@
+---
+- name: Add gitea.service
+  become: true
+  template:
+    src: gitea.service.j2
+    dest: /etc/systemd/system/gitea.service
+  register: add_gitea_service
+
+
+- name: gitea.service start and enable
+  become: true
+  systemd:
+    name: gitea.service
+    daemon_reload: yes
+    state: started
+    enabled: yes

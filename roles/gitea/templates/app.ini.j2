@@ -1,0 +1,67 @@
+APP_NAME = {{ site_name }}
+RUN_USER = {{ work_user }}
+RUN_MODE = prod
+
+[oauth2]
+JWT_SECRET = {{ jwt_secret }}
+
+[security]
+INTERNAL_TOKEN = {{ install_token }}
+INSTALL_LOCK   = true
+SECRET_KEY     = {{ secret_token }}
+
+[database]
+DB_TYPE  = postgres
+HOST     = {{ db_host }}:{{ db_port }}
+NAME     = {{ db_name }}
+USER     = {{ db_user }}
+PASSWD   = {{ db_pass }}
+SSL_MODE = disable
+CHARSET  = utf8
+PATH     = {{ work_dir }}/data/gitea.db
+
+[repository]
+ROOT = {{ repo_dir }}
+
+[server]
+SSH_DOMAIN       = localhost
+DOMAIN           = localhost
+HTTP_PORT        = {{ site_port }}
+ROOT_URL         = http://{{ site_url }}:{{ site_port }}/
+DISABLE_SSH      = false
+SSH_PORT         = {{ ssh_port }}
+LFS_START_SERVER = true
+LFS_CONTENT_PATH = {{ work_dir }}/data/lfs
+LFS_JWT_SECRET   = {{ lfs_jwt_secret }}
+OFFLINE_MODE     = false
+
+[mailer]
+ENABLED = false
+
+[service]
+REGISTER_EMAIL_CONFIRM            = false
+ENABLE_NOTIFY_MAIL                = false
+DISABLE_REGISTRATION              = false
+ALLOW_ONLY_EXTERNAL_REGISTRATION  = false
+ENABLE_CAPTCHA                    = false
+REQUIRE_SIGNIN_VIEW               = false
+DEFAULT_KEEP_EMAIL_PRIVATE        = false
+DEFAULT_ALLOW_CREATE_ORGANIZATION = true
+DEFAULT_ENABLE_TIMETRACKING       = true
+NO_REPLY_ADDRESS                  = noreply.example.org
+
+[picture]
+DISABLE_GRAVATAR        = false
+ENABLE_FEDERATED_AVATAR = true
+
+[openid]
+ENABLE_OPENID_SIGNIN = true
+ENABLE_OPENID_SIGNUP = true
+
+[session]
+PROVIDER = file
+
+[log]
+MODE      = file
+LEVEL     = info
+ROOT_PATH = {{ work_dir }}/log

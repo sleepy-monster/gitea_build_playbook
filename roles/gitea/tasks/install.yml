@@ -1,0 +1,43 @@
+---
+- name: mkdir gitea work direcrory
+  become: true
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ work_user }}"
+    group: "{{ work_user }}"
+    mode: 0750
+  loop:
+    - "{{ work_dir }}/custom"
+    - "{{ work_dir }}/data"
+    - "{{ work_dir }}/log"
+    - "{{ conf_dir }}"
+
+- name: mkdir gitea conf direcrory
+  become: true
+  file:
+    path: "{{ conf_dir }}"
+    state: directory
+    owner: root
+    group: "{{ work_user }}"
+    mode: 0770
+
+- name: mkdir gitea repositories direcrory
+  become: true
+  file:
+    path: "{{ repo_dir }}"
+    state: directory
+    owner: "{{ work_user }}"
+    group: "{{ work_user }}"
+    mode: 0755
+
+
+- name: download gitea
+  become: true
+  get_url:
+    url: "https://dl.gitea.io/gitea/{{ gitea_ver }}/gitea-{{ gitea_ver }}-linux-amd64"
+    dest: "{{ install_dir }}/gitea"
+    owner: "{{ work_user }}"
+    group: "{{ work_user }}"
+    mode: '0755'
+    force: yes

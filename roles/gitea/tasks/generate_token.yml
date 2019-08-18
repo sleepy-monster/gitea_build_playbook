@@ -1,0 +1,28 @@
+---
+- name: Generate INTERNAL_TOKEN
+  become: true
+  shell: 'gitea generate secret INTERNAL_TOKEN'
+  args:
+    chdir: "{{ install_dir }}"
+  register: install_token_result
+
+- name: Generate JWT_SECRET
+  become: true
+  shell: 'gitea generate secret JWT_SECRET'
+  args:
+    chdir: "{{ install_dir }}"
+  register: jwt_secret_result
+
+- name: Generate LFS_JWT_SECRET
+  become: true
+  shell: 'gitea generate secret LFS_JWT_SECRET'
+  args:
+    chdir: "{{ install_dir }}"
+  register: lfs_jwt_secret_result
+
+- name: Generate SECRET_KEY
+  become: true
+  shell: 'gitea generate secret SECRET_KEY'
+  args:
+    chdir: "{{ install_dir }}"
+  register: secret_token_result

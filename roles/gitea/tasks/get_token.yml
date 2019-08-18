@@ -1,0 +1,28 @@
+---
+- name: Get INTERNAL_TOKEN
+  become: true
+  shell: "cat app.ini | grep ^INTERNAL_TOKEN | sed -r 's/INTERNAL_TOKEN( *)= //'"
+  args:
+    chdir: "{{ conf_dir }}"
+  register: install_token_result
+
+- name: Get JWT_SECRET
+  become: true
+  shell: "cat app.ini | grep ^JWT_SECRET | sed -r 's/JWT_SECRET( *)= //'"
+  args:
+    chdir: "{{ conf_dir }}"
+  register: jwt_secret_result
+
+- name: Get LFS_JWT_SECRET
+  become: true
+  shell: "cat app.ini | grep ^LFS_JWT_SECRET | sed -r 's/LFS_JWT_SECRET( *)= //'"
+  args:
+    chdir: "{{ conf_dir }}"
+  register: lfs_jwt_secret_result
+
+- name: Get SECRET_KEY
+  become: true
+  shell: "cat app.ini | grep ^SECRET_KEY | sed -r 's/SECRET_KEY( *)= //'"
+  args:
+    chdir: "{{ conf_dir }}"
+  register: secret_token_result

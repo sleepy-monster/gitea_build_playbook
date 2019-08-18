@@ -1,0 +1,16 @@
+---
+- name: Add the Work Group
+  become: true
+  group:
+    name: "{{ work_user }}"
+
+- name: Add the Work User
+  become: true
+  user:
+    name:  "{{ work_user }}"
+    group: "{{ work_user }}"
+    comment: 'Gitea Version Control'
+    system: yes
+    shell: /bin/bash
+    home: "/home/{{ work_user }}"
+    password_lock: yes
